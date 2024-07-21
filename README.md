@@ -29,3 +29,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 If you have any questions or suggestions, feel free to contact me at [wilson.rfaustino@gmail.com](mailto:wilson.rfaustino@gmail.com).
+
+Made with ❤️ by [Wilson Faustino](https://github.com/wilsonfaustino)
