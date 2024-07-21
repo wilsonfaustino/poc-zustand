@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# POC - React + Vite + Zustand
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This README provides an overview of the project and its purpose.
 
-Currently, two official plugins are available:
+## Project Description
+The project was created to validate Zustand as an option to React Context API. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+To install the project, follow these steps:
 
-## Expanding the ESLint configuration
+1. Clone the repository.
+2. Run `pnpm install` to install the dependencies.
+3. Run `pnpm dev` to run in dev mode.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech used
 
-- Configure the top-level `parserOptions` property like this:
+1. React
+2. Vite
+3. Typescript
+4. TailwindCSS
+5. Zustand
+6. Immer
+7. Framer Motion
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+If you have any questions or suggestions, feel free to contact me at [wilson.rfaustino@gmail.com](mailto:wilson.rfaustino@gmail.com).
