@@ -17,7 +17,7 @@ export const Counter = () => {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl">Contador:</h1>
+        <h1 className="text-2xl">Contador:</h1>
         <CounterDisplay value={counter.count} />
       </div>
       <div className="space-x-3">
