@@ -1,33 +1,27 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useShallow } from 'zustand/react/shallow'
 
+import { useUser } from '@/app/hooks/use-user'
 import { type User, userSchema } from '@/app/schemas/user'
-import { useStore } from '@/app/store'
 
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 
 export const UserForm = () => {
-  const user = useStore(
-    useShallow((state) => ({
-      name: state.user.data.userName,
-      setUserName: state.user.setUserName,
-    }))
-  )
+  const { userName, setUserName } = useUser()
   const form = useForm<User>({
     defaultValues: {
-      userName: user.name,
+      userName,
     },
     resolver: zodResolver(userSchema),
   })
 
   const onSubmit = form.handleSubmit((data) => {
-    if (data.userName === user.name) return
+    if (data.userName === userName) return
 
-    user.setUserName(data.userName)
+    setUserName(data.userName)
   })
 
   return (
