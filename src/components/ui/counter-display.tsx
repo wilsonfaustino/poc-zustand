@@ -9,6 +9,7 @@ const height = fontSize + padding
 export const CounterDisplay = ({ value }: { value: number }) => {
   return (
     <div
+      data-testid="counter-display"
       style={{ fontSize }}
       className="flex space-x-3 overflow-hidden rounded bg-white px-2 leading-none text-gray-900"
     >
