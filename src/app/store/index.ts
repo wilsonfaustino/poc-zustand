@@ -31,6 +31,6 @@ export const useStore = create<Store>()(
           }),
       }
     ),
-    { enabled: import.meta.env.DEV, name: 'Conecte Store', store: 'global' }
+    { /* enabled: import.meta.env.DEV, */ name: 'Conecte Store', store: 'global' }
   )
 )
