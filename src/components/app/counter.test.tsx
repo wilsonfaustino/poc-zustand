@@ -1,34 +1,53 @@
 import '@testing-library/jest-dom'
 
-import { fireEvent, render } from '@testing-library/react'
-
-import { useStore } from '@/app/store'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 
 import { Counter } from './counter'
 
 describe('Counter', () => {
-  it('should render the counter component', () => {
-    const { getByText } = render(<Counter />)
+  it('should render the counter component', async () => {
+    render(<Counter />)
 
-    expect(getByText('Contador:')).toBeInTheDocument()
+    await waitFor(
+      () => {
+        expect(screen.getByText('Contador:')).toBeInTheDocument()
+        expect(screen.getAllByText(0)[0]).toHaveStyle({ transform: 'none' })
+        expect(screen.getAllByText(0)[1]).toHaveStyle({ transform: 'none' })
+        expect(screen.getAllByText(0)[2]).toHaveStyle({ transform: 'none' })
+      },
+      { timeout: 1500 }
+    )
   })
 
-  it('should increment the counter when the increment button is clicked', () => {
-    const { getByText, getByTestId } = render(<Counter />)
-    const incrementButton = getByText('Incrementar')
-    const counterDisplay = getByTestId('counter-display')
+  it('should increment the counter when the increment button is clicked', async () => {
+    render(<Counter />)
+
+    const incrementButton = screen.getByText('Incrementar')
 
     fireEvent.click(incrementButton)
 
-    expect(counterDisplay).toHaveTextContent('1')
+    await waitFor(
+      () => {
+        expect(screen.getAllByText(1)[2]).toHaveStyle({ transform: 'none' })
+      },
+      { timeout: 1500 }
+    )
   })
 
-  it('should decrement the counter when the decrement button is clicked', () => {
-    const { getByText } = render(<Counter />)
-    const decrementButton = getByText('Decrementar')
+  it('should decrement the counter when the decrement button is clicked', async () => {
+    render(<Counter />)
+
+    const decrementButton = screen.getByText('Decrementar')
 
     fireEvent.click(decrementButton)
 
-    expect(useStore.getState().counter.count).toBe(-1)
+    await waitFor(
+      () => {
+        expect(screen.getAllByText(9)[0]).toHaveStyle({ transform: 'none' })
+        expect(screen.getAllByText(9)[1]).toHaveStyle({ transform: 'none' })
+        expect(screen.getAllByText(9)[2]).toHaveStyle({ transform: 'none' })
+      },
+      { timeout: 1500 }
+    )
   })
 })
