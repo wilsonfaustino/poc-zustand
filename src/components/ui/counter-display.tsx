@@ -52,7 +52,11 @@ const Number = ({ mv, number }: { mv: MotionValue; number: number }) => {
   })
 
   return (
-    <motion.span style={{ y }} className="absolute inset-0 flex items-center justify-center">
+    <motion.span
+      style={{ y }}
+      aria-hidden={y.get() === 0 ? 'false' : 'true'}
+      className="absolute inset-0 flex items-center justify-center"
+    >
       {number}
     </motion.span>
   )
