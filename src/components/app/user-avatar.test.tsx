@@ -1,48 +1,39 @@
-import { render, screen } from '@testing-library/react'
-import { useEffect } from 'react'
+import { render, screen, waitFor } from '@testing-library/react'
 
-import { useUser } from '@/app/hooks/use-user'
 import { UserAvatar } from '@/components/app/user-avatar'
 
-jest.mock('@/app/hooks/use-user', () => ({
-  useUser: jest.fn(),
-}))
-
-const ChangeUser = ({ userName, children }: { userName: string; children: React.ReactNode }) => {
-  const { setUserName } = useUser()
-
-  useEffect(() => {
-    setUserName(userName)
-  }, [userName, setUserName])
-
-  return userName ? <>{children}</> : null
-}
-
 describe('UserAvatar', () => {
-  const setUsernameMock = jest.fn()
+  const orignalGlobalImage = window.Image
 
-  beforeEach(() => {
-    ;(useUser as jest.Mock).mockReturnValue({
-      userName: '',
-      setUserName: setUsernameMock,
-    })
+  beforeAll(() => {
+    ;(window.Image as any) = class MockImage {
+      onload: () => void = () => {}
+      src: string = ''
+      constructor() {
+        setTimeout(() => {
+          this.onload()
+        }, 300)
+
+        return this
+      }
+    }
   })
-  afterEach(() => {
-    jest.clearAllMocks()
+  afterAll(() => {
+    window.Image = orignalGlobalImage
   })
   it('should render the user avatar with the correct URL', async () => {
-    render(
-      <ChangeUser userName="test-user">
-        <UserAvatar />
-      </ChangeUser>
+    render(<UserAvatar userName="wilsonfaustino" />)
+
+    await waitFor(
+      () => {
+        expect(screen.getByAltText('Avatar @wilsonfaustino')).toBeInTheDocument()
+        expect(screen.getByAltText('Avatar @wilsonfaustino')).toHaveAttribute(
+          'src',
+          'https://github.com/wilsonfaustino.png'
+        )
+      },
+      { timeout: 1500 }
     )
-
-    expect(setUsernameMock).toHaveBeenCalledTimes(1)
-    expect(setUsernameMock).toHaveBeenCalledWith('test-user')
-    // const avatarImage = await screen.getByAltText('Avatar @test-user')
-
-    // expect(avatarImage).toBeInTheDocument()
-    //   expect(avatarImage).toHaveAttribute('src', 'https://github.com/wilsonfaustino.png')
   })
 
   it('should render the fallback text when the user is not found', () => {
