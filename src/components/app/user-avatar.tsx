@@ -1,10 +1,10 @@
+import { useUser } from '@/app/hooks/use-user'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
-interface UserAvatarProps {
-  userName?: string
-}
+export const UserAvatar = () => {
+  const { userName } = useUser()
 
-export const UserAvatar = ({ userName }: UserAvatarProps) => {
   return (
     <Avatar className="size-40">
       <AvatarImage src={`https://github.com/${userName}.png`} alt={`Avatar @${userName}`} />
