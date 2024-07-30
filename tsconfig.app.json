@@ -29,7 +29,8 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": ["jest", "@testing-library/jest-dom", "@testing-library/react"]
   },
   "include": ["src", "./setup-tests.ts"]
 }
